@@ -7,7 +7,6 @@ interface copyButtonProps {
 
 const CopyButton = (props: copyButtonProps) => {
   const copyToClipBoard = async () => {
-    console.log(props.copyText)
     try {
       await navigator.clipboard.writeText(props.copyText)
       alert('Text copied to clipboard')
@@ -16,7 +15,7 @@ const CopyButton = (props: copyButtonProps) => {
     }
   }
   return (
-    <IconButton size="small" onClick={copyToClipBoard}>
+    <IconButton sx={{ mb: 2 }} size="small" onClick={copyToClipBoard}>
       <ContentCopyIcon />
     </IconButton>
   )

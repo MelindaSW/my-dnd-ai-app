@@ -15,7 +15,7 @@ const Backstory = () => {
         display: 'flex',
         gap: 0.7,
         mt: 15,
-        ml: 0,
+        // ml: 0,
         alignItems: 'flex-start',
         justifyContent: 'center',
         '@media (max-width: 873px)': {
