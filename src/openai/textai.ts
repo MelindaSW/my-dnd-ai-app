@@ -9,7 +9,7 @@ const openai = new OpenAI({
 export const queryAI = async (systemContent: string, userContent: string) => {
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: import.meta.env.VITE_AI_MODEL,
       messages: [
         {
           role: 'system',
@@ -25,6 +25,20 @@ export const queryAI = async (systemContent: string, userContent: string) => {
       // top_p: 1
     })
 
+    return response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const conversationAI = async (
+  messages: OpenAI.Chat.ChatCompletionMessageParam[]
+) => {
+  try {
+    const response = await openai.chat.completions.create({
+      model: import.meta.env.VITE_AI_MODEL,
+      messages: messages
+    })
     return response
   } catch (error) {
     console.log(error)

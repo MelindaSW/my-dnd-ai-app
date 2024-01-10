@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import aiResponseReducer from './slices/AIresponseSlice'
+import conversationReducer from './slices/ConversationSlice'
 
 const store = configureStore({
   reducer: {
-    aiResponse: aiResponseReducer
+    aiResponse: aiResponseReducer,
+    conversation: conversationReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

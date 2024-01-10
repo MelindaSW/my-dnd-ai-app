@@ -45,7 +45,8 @@ const Backstory = () => {
           mb: 5,
           '@media (max-width: 873px)': {
             // width: 400
-            width: '90%'
+            width: '90%',
+            boxShadow: 'inset  0 -10px 7px -5px #00000030'
           }
         }}
         elevation={3}
