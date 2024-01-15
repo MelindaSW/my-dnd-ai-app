@@ -14,16 +14,16 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
-    addConversation: (state, action: PayloadAction<ChatCompletionMessageParam>) => {
+    addToConversation: (state, action: PayloadAction<ChatCompletionMessageParam>) => {
       state.conversation.push(action.payload)
     },
-    emptyConversation: (state) => {
+    clearConversation: (state) => {
       state.conversation = []
     }
   }
 })
 
-export const { addConversation } = conversationSlice.actions
+export const { addToConversation, clearConversation } = conversationSlice.actions
 export const conversation = (state: RootState) => state.conversation
 
 export default conversationSlice.reducer

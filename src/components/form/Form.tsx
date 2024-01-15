@@ -2,9 +2,13 @@ import React from 'react'
 import { FormControl, TextField, MenuItem, Button, Typography } from '@mui/material'
 import { DNDRaces, DNDClasses, DNDLevels, DNDAlignments } from '../../utils/constants'
 import { getBackstoryPrompt, BackstorySystemPrompt } from '../../utils/prompts'
-import { queryAI } from '../../openai/textai'
-import { useAppDispatch } from '../../redux/hooks'
-import { updateBackstory, updateIsThinking } from '../../redux/slices/AIresponseSlice'
+import { sendAiConversation } from '../../openai/textai'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { updateError, updateIsThinking } from '../../redux/slices/AIresponseSlice'
+import {
+  addToConversation,
+  clearConversation
+} from '../../redux/slices/ConversationSlice'
 
 interface form {
   name: string
@@ -36,25 +40,45 @@ const Form = () => {
     alignment: ''
   })
   const [valid, setValid] = React.useState(false)
+  const conversationState = useAppSelector((state) => state.conversation)
 
   React.useEffect(() => {
     setValid(validate(formState))
   }, [formState])
 
   const handleClick = async () => {
-    dispatch(updateBackstory(''))
+    // dispatch(updateBackstory(''))
+    dispatch(clearConversation())
     dispatch(updateIsThinking(true))
-    const response = await queryAI(
-      BackstorySystemPrompt,
-      getBackstoryPrompt(
-        formState.name,
-        formState.race,
-        formState.class,
-        formState.level,
-        formState.alignment
-      )
+    dispatch(
+      addToConversation({
+        role: 'system',
+        content: BackstorySystemPrompt
+      })
     )
-    dispatch(updateBackstory(response?.choices[0].message.content))
+    dispatch(
+      addToConversation({
+        role: 'user',
+        content: getBackstoryPrompt(
+          formState.name,
+          formState.race,
+          formState.class,
+          formState.level,
+          formState.alignment
+        )
+      })
+    )
+
+    console.log(conversationState.conversation)
+
+    const response = await sendAiConversation(conversationState.conversation)
+
+    dispatch(
+      addToConversation({
+        role: 'assistant',
+        content: response?.choices[0].message.content
+      })
+    )
     dispatch(updateIsThinking(false))
   }
 

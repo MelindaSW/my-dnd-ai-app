@@ -31,18 +31,19 @@ export const queryAI = async (systemContent: string, userContent: string) => {
   }
 }
 
-export const conversationAI = async (
+export const sendAiConversation = async (
   messages: OpenAI.Chat.ChatCompletionMessageParam[]
 ) => {
-  try {
-    const response = await openai.chat.completions.create({
-      model: import.meta.env.VITE_AI_MODEL,
-      messages: messages
-    })
-    return response
-  } catch (error) {
-    console.log(error)
-  }
+  // try {
+
+  // } catch ()
+  const response = await openai.chat.completions.create({
+    model: import.meta.env.VITE_AI_MODEL,
+    messages: messages,
+    temperature: 0.9,
+    max_tokens: 4000
+  })
+  return response
 }
 
 // Example of response format

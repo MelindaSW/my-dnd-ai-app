@@ -1,73 +1,73 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material'
 
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
-      danger: string;
-    };
+      danger: string
+    }
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
     props?: {
       MuiAppBar?: {
         color?: string
-      },
+      }
       MuiButton?: {
-        size?: string;
-      },
+        size?: string
+      }
       MuiButtonGroup?: {
-        size?: string;
-      },
+        size?: string
+      }
       MuiCheckbox?: {
-        size?: string;
-      },
+        size?: string
+      }
       MuiFab?: {
-        size?: string;
-      },
+        size?: string
+      }
       MuiFormControl?: {
-        margin?: string;
-        size?: string;
-      },
+        margin?: string
+        size?: string
+      }
       MuiFormHelperText?: {
-        margin?: string;
-      },
+        margin?: string
+      }
       MuiIconButton?: {
-        size?: string;
-      },
+        size?: string
+      }
       MuiInputBase?: {
-        margin?: string;
-      },
+        margin?: string
+      }
       MuiInputLabel?: {
-        margin: string;
-      },
+        margin: string
+      }
       MuiRadio?: {
-        size: string;
-      },
+        size: string
+      }
       MuiSwitch?: {
-        size: string;
-      },
+        size: string
+      }
       MuiTextField?: {
-        margin?: string;
-        size?: string;
-      },
+        margin?: string
+        size?: string
+      }
       MuiList?: {
-        dense?: boolean;
-      },
+        dense?: boolean
+      }
       MuiMenuItem?: {
-        dense?: boolean;
-      },
+        dense?: boolean
+      }
       MuiTable?: {
-        size?: 'small';
-      },
-    };
+        size?: 'small'
+      }
+    }
     overrides?: {
       MuiAppBar?: {
         colorInherit?: {
-          backgroundColor: string,
-          color: string,
-        },
-      },
-    },
+          backgroundColor: string
+          color: string
+        }
+      }
+    }
   }
 }
 
@@ -75,80 +75,80 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#464440',
+      main: '#464440'
     },
     secondary: {
-      main: '#71282f',
+      main: '#71282f'
     },
     error: {
-      main: '#ea1010',
+      main: '#ea1010'
     },
     warning: {
-      main: '#ed020f',
-    },
+      main: '#ed020f'
+    }
   },
   props: {
     MuiAppBar: {
-      color: 'inherit',
+      color: 'inherit'
     },
     MuiButton: {
-      size: 'small',
+      size: 'small'
     },
     MuiButtonGroup: {
-      size: 'small',
+      size: 'small'
     },
     MuiCheckbox: {
-      size: 'small',
+      size: 'small'
     },
     MuiFab: {
-      size: 'small',
+      size: 'small'
     },
     MuiFormControl: {
       margin: 'dense',
-      size: 'small',
+      size: 'small'
     },
     MuiFormHelperText: {
-      margin: 'dense',
+      margin: 'dense'
     },
     MuiIconButton: {
-      size: 'small',
+      size: 'small'
     },
     MuiInputBase: {
-      margin: 'dense',
+      margin: 'dense'
     },
     MuiInputLabel: {
-      margin: 'dense',
+      margin: 'dense'
     },
     MuiRadio: {
-      size: 'small',
+      size: 'small'
     },
     MuiSwitch: {
-      size: 'small',
+      size: 'small'
     },
     MuiTextField: {
       margin: 'dense',
-      size: 'small',
+      size: 'small'
     },
     MuiList: {
-      dense: true,
+      dense: true
     },
     MuiMenuItem: {
-      dense: true,
+      dense: true
     },
     MuiTable: {
-      size: 'small',
-    },
+      size: 'small'
+    }
   },
   overrides: {
     MuiAppBar: {
       colorInherit: {
         backgroundColor: '#689f38',
-        color: '#fff',
-      },
-    },
+        color: '#fff'
+      }
+    }
   },
   shape: {
-    borderRadius: 4,
+    borderRadius: 4
   },
-  spacing: 8,
-});
+  spacing: 8
+})

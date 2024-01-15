@@ -1,5 +1,5 @@
 import './App.css'
-import Backstory from './pages/backstory/Backstory'
+import Story from './pages/Story/Story'
 import Header from './components/header/Header'
 // import Footer from './components/footer/Footer'
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <Backstory />
+      <Story />
       {/* <Footer /> */}
     </>
   )
