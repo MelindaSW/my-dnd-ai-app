@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { addToConversation } from '../../redux/slices/ConversationSlice'
 import { getMoreInformationPrompt } from '../../utils/prompts'
 import { updateIsThinking } from '../../redux/slices/AIresponseSlice'
-import CopyButton from '../copyButton/CopyButton'
 import { storyOptions } from '../../utils/constants'
+import CopyButton from '../copyButton/CopyButton'
 
 const MoreSelect = () => {
   const dispatch = useAppDispatch()
