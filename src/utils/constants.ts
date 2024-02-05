@@ -1,3 +1,10 @@
+import { ChatCompletionMessageParam } from 'openai/resources/index.mjs'
+import {
+  BackstorySystemPrompt,
+  getBackstoryPrompt,
+  getMoreInformationPrompt
+} from './prompts'
+
 export const DNDRaces: string[] = [
   'Dwarf',
   'Elf',
@@ -87,3 +94,34 @@ Elysia's commitment to her faith and her unwavering sense of duty led her to joi
 As her power and reputation grew, Elysia found herself facing increasingly dangerous challenges. From vanquishing evil necromancers to aiding kings in their fight against tyrants, she became a celebrated protector of the weak and a fierce enemy of those who sought to impose suffering on the innocent.
 
 Now, at the age of 18, Elysia has reached the peak of her cleric training, a beacon of hope and light in a world plagued by darkness. Though she has faced many trials and sacrifices along her journey, her unwavering devotion to her faith and her unyielding sense of justice continue to guide her path. With her radiant aura and healing touch, Elysia Duskwood stands as a symbol of hope and salvation for all who cross her path.`
+
+export const mockConversation: ChatCompletionMessageParam[] = [
+  {
+    role: 'system',
+    content: BackstorySystemPrompt
+  },
+  {
+    role: 'user',
+    content: getBackstoryPrompt('Elysia', 'Elf', 'Ranger', 5, 'Neutral Good')
+  },
+  {
+    role: 'assistant',
+    content: mockStory
+  },
+  {
+    role: 'user',
+    content: getMoreInformationPrompt(storyOptions[0])
+  },
+  {
+    role: 'assistant',
+    content: mockStory
+  },
+  {
+    role: 'user',
+    content: getMoreInformationPrompt(storyOptions[2])
+  },
+  {
+    role: 'assistant',
+    content: mockStory
+  }
+]

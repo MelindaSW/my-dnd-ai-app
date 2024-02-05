@@ -4,7 +4,10 @@ import { DNDRaces, DNDClasses, DNDLevels, DNDAlignments } from '../../utils/cons
 import { getBackstoryPrompt, BackstorySystemPrompt } from '../../utils/prompts'
 import { sendAiConversation } from '../../openai/textai'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { updateError, updateIsThinking } from '../../redux/slices/AIresponseSlice'
+import {
+  /*updateError,*/ updateError,
+  updateIsThinking
+} from '../../redux/slices/AIresponseSlice'
 import {
   addToConversation,
   clearConversation
@@ -41,15 +44,37 @@ const Form = () => {
   })
   const [valid, setValid] = React.useState(false)
   const conversationState = useAppSelector((state) => state.conversation)
+  const isThinking = useAppSelector((state) => state.aiResponse.isThinking)
 
   React.useEffect(() => {
     setValid(validate(formState))
   }, [formState])
 
+  React.useEffect(() => {
+    if (isThinking) {
+      sendConversation()
+    }
+  }, [isThinking])
+
+  const sendConversation = async () => {
+    console.log(conversationState.conversation)
+    try {
+      const response = await sendAiConversation(conversationState.conversation)
+      dispatch(
+        addToConversation({
+          role: 'assistant',
+          content: response?.choices[0].message.content
+        })
+      )
+    } catch (error) {
+      console.log(error)
+      // updateError(error)
+    }
+    dispatch(updateIsThinking(false))
+  }
+
   const handleClick = async () => {
-    // dispatch(updateBackstory(''))
     dispatch(clearConversation())
-    dispatch(updateIsThinking(true))
     dispatch(
       addToConversation({
         role: 'system',
@@ -68,18 +93,7 @@ const Form = () => {
         )
       })
     )
-
-    console.log(conversationState.conversation)
-
-    const response = await sendAiConversation(conversationState.conversation)
-
-    dispatch(
-      addToConversation({
-        role: 'assistant',
-        content: response?.choices[0].message.content
-      })
-    )
-    dispatch(updateIsThinking(false))
+    dispatch(updateIsThinking(true))
   }
 
   return (

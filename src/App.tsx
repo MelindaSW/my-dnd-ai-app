@@ -1,5 +1,5 @@
 import './App.css'
-import Story from './pages/Story/Story'
+import Story from './components/Story/Story'
 import Header from './components/header/Header'
 // import Footer from './components/footer/Footer'
 

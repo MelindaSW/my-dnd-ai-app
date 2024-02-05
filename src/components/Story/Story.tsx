@@ -1,26 +1,24 @@
 import React from 'react'
 import './Story.css'
-import Form from '../../components/form/Form'
-import CopyButton from '../../components/copyButton/copyButton'
-import MoreSelect from '../../components/moreSelect/MoreSelect'
-import { Container, Paper, Typography, LinearProgress, Collapse } from '@mui/material'
+import Form from '../form/Form'
+import MoreSelect from '../moreSelect/MoreSelect'
+import { Container, Paper, LinearProgress, Collapse, Divider } from '@mui/material'
 import { useAppSelector } from '../../redux/hooks'
-import { mockStory } from '../../utils/constants'
+import ConversationText from '../conversationText/ConversationText'
 
 const Story = () => {
-  // const backStory = useAppSelector((state) => state.aiResponse.backstory)
   const isThinking = useAppSelector((state) => state.aiResponse.isThinking)
   const conversation = useAppSelector((state) => state.conversation.conversation)
-  const [completeText, setCompleteText] = React.useState('')
+  const [showConversation, setShowConversation] = React.useState(false)
 
   React.useEffect(() => {
-    const text = ''
+    let show = false
     conversation.forEach((c) => {
       if (c.role === 'assistant' && c.content !== undefined && c.content !== null) {
-        text.concat(c.content)
+        show = true
       }
     })
-    setCompleteText(text)
+    setShowConversation(show)
   }, [conversation])
 
   return (
@@ -58,7 +56,6 @@ const Story = () => {
           overflow: 'auto',
           mb: 5,
           '@media (max-width: 873px)': {
-            // width: 400
             width: '90%',
             boxShadow: 'inset  0 -15px 10px -5px #c0c0c0'
           }
@@ -66,15 +63,20 @@ const Story = () => {
         elevation={3}
         square={false}
       >
-        <CopyButton copyText={completeText} />
-        <Collapse
-          // in={backStory !== undefined && backStory !== null && backStory.length > 0}
-          in={true}
-        >
-          <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
-            {mockStory}
-          </Typography>
-          <CopyButton copyText={completeText} />
+        <Collapse in={showConversation}>
+          {conversation.map((c, i) => {
+            if (c.role === 'assistant') {
+              return (
+                <>
+                  <ConversationText
+                    key={i}
+                    text={c.content !== undefined && c.content !== null ? c.content : ''}
+                  />
+                  <Divider key={i + 1} sx={{ mb: 3, mt: 3 }} />
+                </>
+              )
+            }
+          })}
           <MoreSelect />
         </Collapse>
         {isThinking && <LinearProgress color="secondary" variant="indeterminate" />}

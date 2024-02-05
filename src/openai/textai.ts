@@ -20,11 +20,10 @@ export const queryAI = async (systemContent: string, userContent: string) => {
           content: userContent
         }
       ],
-      temperature: 0.9,
-      max_tokens: 4000
-      // top_p: 1
+      temperature: 0.0,
+      max_tokens: 500
+      // top_p: 0
     })
-
     return response
   } catch (error) {
     console.log(error)
@@ -34,14 +33,11 @@ export const queryAI = async (systemContent: string, userContent: string) => {
 export const sendAiConversation = async (
   messages: OpenAI.Chat.ChatCompletionMessageParam[]
 ) => {
-  // try {
-
-  // } catch ()
   const response = await openai.chat.completions.create({
     model: import.meta.env.VITE_AI_MODEL,
     messages: messages,
     temperature: 0.9,
-    max_tokens: 4000
+    max_tokens: 600
   })
   return response
 }

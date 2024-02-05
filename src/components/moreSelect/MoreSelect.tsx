@@ -1,9 +1,14 @@
 import React from 'react'
 import './MoreSelect.css'
-import { TextField, MenuItem, Divider, Button } from '@mui/material'
+import { TextField, MenuItem, Button } from '@mui/material'
 import { storyOptions } from '../../utils/constants'
+import { useAppDispatch } from '../../redux/hooks'
+import { addToConversation } from '../../redux/slices/ConversationSlice'
+import { getMoreInformationPrompt } from '../../utils/prompts'
+import { updateIsThinking } from '../../redux/slices/AIresponseSlice'
 
 const MoreSelect = () => {
+  const dispatch = useAppDispatch()
   const [value, setValue] = React.useState('')
   const [valid, setValid] = React.useState(false)
 
@@ -13,11 +18,14 @@ const MoreSelect = () => {
 
   const handleClick = () => {
     console.log(value)
+    dispatch(
+      addToConversation({ role: 'user', content: getMoreInformationPrompt(value) })
+    )
+    dispatch(updateIsThinking(true))
   }
 
   return (
     <div className="container">
-      <Divider sx={{ mb: 3 }} />
       <TextField
         id="more-select"
         select
