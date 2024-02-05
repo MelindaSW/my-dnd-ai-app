@@ -7,11 +7,8 @@ interface conversationTextProps {
 
 const ConversationText = (props: conversationTextProps) => {
   return (
-    <Collapse
-      // in={backStory !== undefined && backStory !== null && backStory.length > 0}
-      in={true}
-    >
-      <CopyButton copyText={props.text} />
+    <Collapse in={true}>
+      <CopyButton copyText={props.text} toolTip="Copy text" />
       <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
         {props.text}
       </Typography>

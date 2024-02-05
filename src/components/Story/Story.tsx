@@ -79,7 +79,9 @@ const Story = () => {
           })}
           <MoreSelect />
         </Collapse>
-        {isThinking && <LinearProgress color="secondary" variant="indeterminate" />}
+        {isThinking && (
+          <LinearProgress sx={{ mt: 3 }} color="secondary" variant="indeterminate" />
+        )}
       </Paper>
     </Container>
   )

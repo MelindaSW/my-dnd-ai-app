@@ -4,10 +4,7 @@ import { DNDRaces, DNDClasses, DNDLevels, DNDAlignments } from '../../utils/cons
 import { getBackstoryPrompt, BackstorySystemPrompt } from '../../utils/prompts'
 import { sendAiConversation } from '../../openai/textai'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import {
-  /*updateError,*/ updateError,
-  updateIsThinking
-} from '../../redux/slices/AIresponseSlice'
+import { updateError, updateIsThinking } from '../../redux/slices/AIresponseSlice'
 import {
   addToConversation,
   clearConversation
@@ -68,7 +65,7 @@ const Form = () => {
       )
     } catch (error) {
       console.log(error)
-      // updateError(error)
+      updateError('Something went wrong, please try again.')
     }
     dispatch(updateIsThinking(false))
   }

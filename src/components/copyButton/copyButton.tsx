@@ -3,6 +3,7 @@ import { IconButton, Tooltip } from '@mui/material'
 
 interface copyButtonProps {
   copyText: string
+  toolTip: string
 }
 
 const CopyButton = (props: copyButtonProps) => {
@@ -15,7 +16,7 @@ const CopyButton = (props: copyButtonProps) => {
   }
 
   return (
-    <Tooltip title="Copy text">
+    <Tooltip title={props.toolTip}>
       <IconButton sx={{ float: 'right', mb: 1 }} size="small" onClick={copyToClipBoard}>
         <ContentCopyIcon />
       </IconButton>
