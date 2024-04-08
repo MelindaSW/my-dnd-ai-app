@@ -10,6 +10,7 @@ const Story = () => {
   const isThinking = useAppSelector((state) => state.aiResponse.isThinking)
   const conversation = useAppSelector((state) => state.conversation.conversation)
   const [showConversation, setShowConversation] = React.useState(false)
+  const endOfTextDiv = React.useRef<null | HTMLDivElement>(null)
 
   React.useEffect(() => {
     let show = false
@@ -19,6 +20,9 @@ const Story = () => {
       }
     })
     setShowConversation(show)
+    if (endOfTextDiv.current) {
+      endOfTextDiv.current?.scrollIntoView({ behavior: 'smooth' })
+    }
   }, [conversation])
 
   return (
@@ -78,6 +82,7 @@ const Story = () => {
             }
           })}
           <MoreSelect />
+          <div ref={endOfTextDiv} />
         </Collapse>
         {isThinking && (
           <LinearProgress sx={{ mt: 3 }} color="secondary" variant="indeterminate" />
